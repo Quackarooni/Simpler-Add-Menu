@@ -12,7 +12,7 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 bl_info = {
-    "name": "Cleaner Add Menu",
+    "name": "Simpler Add Menu",
     "author": "Quackers",
     "description": "Addon for a slightly more cleaner and organized geometry nodes add menu",
     "blender": (3, 4, 0),
@@ -25,10 +25,11 @@ import bpy
 import os
 from bl_ui import node_add_menu
 import json
+from pathlib import Path
 
 menu_classes = []
 addon_draw_funcs = []
-dir_path = os.path.dirname(__file__)
+dir_path = Path(__file__).parent
 spacing = 0.65
 
 def is_addon_enabled(addon_id, *, aliases=None):
@@ -385,7 +386,7 @@ def register():
     for cls in classes:
         bpy.utils.register_class(cls)
 
-    with open("addon_menus.json", "r") as f:
+    with open(dir_path / "addon_menus.json", "r") as f:
         addon_menus = json.loads(f.read())
 
     append_addon_menus(addon_menus)
