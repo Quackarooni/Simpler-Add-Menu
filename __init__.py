@@ -340,7 +340,7 @@ class NODE_MT_custom_add_menu_utilities_converter(MenuBaseClass):
         node_add_menu.add_node_type(layout, "GeometryNodeSwitch")
 
 class NODE_OT_INVOKE_MENU(bpy.types.Operator):
-    bl_label = "Invoke Menu"
+    bl_label = "Invoke Custom Add Menu"
     bl_idname = "custom_add_menu.invoke_menu"
     bl_description = "Calls the custom add menu when in Geometry Node Editor"
     bl_options = {'INTERNAL'}
@@ -379,6 +379,8 @@ classes = (
         NODE_OT_INVOKE_MENU,
         )
 
+addon_keymaps = []
+
 def register():
     for cls in classes:
         bpy.utils.register_class(cls)
@@ -388,10 +390,19 @@ def register():
 
     append_addon_menus(addon_menus)
 
+    if key_config := bpy.context.window_manager.keyconfigs.addon:
+        key_map = key_config.keymaps.new(name='Node Editor', space_type="NODE_EDITOR")
+        key_entry = key_map.keymap_items.new(NODE_OT_INVOKE_MENU.bl_idname, 'A', value='PRESS', shift=True)
+        addon_keymaps.append((key_map, key_entry))    
+
 def unregister():
     for draw_func in addon_draw_funcs:
         bpy.types.NODE_MT_custom_add_menu.remove(draw_func)
 
     for cls in classes:
         bpy.utils.unregister_class(cls)
+
+    for key_map, key_entry in addon_keymaps:
+        key_map.keymap_items.remove(key_entry)
+    addon_keymaps.clear()
 
