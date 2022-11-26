@@ -22,7 +22,6 @@ bl_info = {
 }
 
 import bpy
-import os
 from bl_ui import node_add_menu
 import json
 from pathlib import Path
