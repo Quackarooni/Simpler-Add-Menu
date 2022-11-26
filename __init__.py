@@ -339,6 +339,26 @@ class NODE_MT_custom_add_menu_utilities_converter(MenuBaseClass):
         node_add_menu.add_node_type(layout, "ShaderNodeMix")
         node_add_menu.add_node_type(layout, "GeometryNodeSwitch")
 
+class NODE_OT_INVOKE_MENU(bpy.types.Operator):
+    bl_label = "Invoke Menu"
+    bl_idname = "custom_add_menu.invoke_menu"
+    bl_description = "Calls the custom add menu when in Geometry Node Editor"
+    bl_options = {'INTERNAL'}
+
+    @classmethod
+    def poll(cls, context):
+        return context.space_data.type == 'NODE_EDITOR'
+
+    def execute(self, context):
+        wm = bpy.ops.wm
+
+        if context.space_data.tree_type == "GeometryNodeTree":
+            wm.call_menu(name="NODE_MT_custom_add_menu")
+        else:
+            wm.call_menu(name="NODE_MT_add")
+
+        return {'CANCELLED'}
+
 classes = (
         NODE_MT_custom_add_menu,
         NODE_MT_custom_add_menu_curves,
@@ -356,6 +376,7 @@ classes = (
         NODE_MT_custom_add_menu_utilities_fields,
         NODE_MT_custom_add_menu_utilities_rotation,
         NODE_MT_custom_add_menu_utilities_converter,
+        NODE_OT_INVOKE_MENU,
         )
 
 def register():
