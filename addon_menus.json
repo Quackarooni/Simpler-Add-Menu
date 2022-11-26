@@ -1,0 +1,20 @@
+{
+    "Bradley's Geo Node Presets": {
+        "menu_id": "NODE_MT_GEO", 
+        "text": "Bradley's Presets", 
+        "icon": "KEYTYPE_JITTER_VEC", 
+        "aliases": []
+    },
+    "ETK Core": {
+        "menu_id": "NODE_MT_etk_geo_menu", 
+        "text": "Erindale Toolkit", 
+        "icon": "KEYTYPE_EXTREME_VEC", 
+        "aliases": ["Erindale Toolkit"]
+    }, 
+    "Node++": {
+        "menu_id": "NPP_MT_Menu_Cat", 
+        "text": "Node++", 
+        "icon": "NODE", 
+        "aliases": []
+    }
+}
