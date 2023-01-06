@@ -25,6 +25,7 @@ import bpy
 import json
 from pathlib import Path
 from bl_ui import node_add_menu
+from . import prefs
 
 menu_classes = []
 addon_draw_funcs = []
@@ -47,11 +48,20 @@ def add_node_type(layout, node_type, *, label=None):
     props.use_transform = True
     return props
 
+def fetch_user_preferences():
+    return bpy.context.preferences.addons['Simpler Add Menu'].preferences
+
 def draw_assets_for_catalog(layout, catalog_path):
-    layout.template_node_asset_menu_items(catalog_path=catalog_path)
-    
+    prefs = fetch_user_preferences()
+
+    if prefs.include_nodegroups_asset:
+        layout.template_node_asset_menu_items(catalog_path=catalog_path)
+
 def draw_root_assets(layout):
-    layout.menu_contents("NODE_MT_node_add_root_catalogs")
+    prefs = fetch_user_preferences()
+
+    if prefs.include_nodegroups_asset:
+        layout.menu_contents("NODE_MT_node_add_root_catalogs")
 
 def is_addon_enabled(addon_id, *, aliases=None):
     is_addon_there = addon_id in bpy.context.preferences.addons.keys()
@@ -709,6 +719,8 @@ classes = (
 addon_keymaps = []
 
 def register():
+    prefs.register()
+
     for cls in classes:
         bpy.utils.register_class(cls)
 
@@ -723,6 +735,8 @@ def register():
         addon_keymaps.append((key_map, key_entry))    
 
 def unregister():
+    prefs.unregister()
+
     for draw_func in addon_draw_funcs:
         bpy.types.NODE_MT_custom_add_menu.remove(draw_func)
 
