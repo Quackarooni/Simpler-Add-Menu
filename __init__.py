@@ -47,6 +47,9 @@ def add_node_type(layout, node_type, *, label=None):
     props.use_transform = True
     return props
 
+def draw_root_assets(layout):
+    layout.menu_contents("NODE_MT_node_add_root_catalogs")
+
 def is_addon_enabled(addon_id, *, aliases=None):
     is_addon_there = addon_id in bpy.context.preferences.addons.keys()
     is_any_alias_there = False
@@ -125,6 +128,7 @@ class NODE_MT_custom_add_menu(MenuBaseClass):
         layout.separator(factor=spacing)
         layout.menu(NODE_MT_custom_add_menu_group.bl_idname)
         layout.menu(NODE_MT_custom_add_menu_layout.bl_idname)
+        draw_root_assets(layout)
 
 class NODE_MT_custom_add_menu_attribute(MenuBaseClass):
     bl_idname = "NODE_MT_custom_add_menu_attribute"
