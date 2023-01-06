@@ -47,6 +47,9 @@ def add_node_type(layout, node_type, *, label=None):
     props.use_transform = True
     return props
 
+def draw_assets_for_catalog(layout, catalog_path):
+    layout.template_node_asset_menu_items(catalog_path=catalog_path)
+    
 def draw_root_assets(layout):
     layout.menu_contents("NODE_MT_node_add_root_catalogs")
 
@@ -114,7 +117,7 @@ class NODE_MT_custom_add_menu(MenuBaseClass):
 
         layout.menu(NODE_MT_custom_add_menu_geometry.bl_idname)
         layout.menu(NODE_MT_custom_add_menu_mesh.bl_idname)
-        layout.menu(NODE_MT_custom_add_menu_curves.bl_idname)
+        layout.menu(NODE_MT_custom_add_menu_curve.bl_idname)
         layout.menu(NODE_MT_custom_add_menu_instance.bl_idname)
         layout.menu(NODE_MT_custom_add_menu_point.bl_idname)
         layout.menu(NODE_MT_custom_add_menu_volume.bl_idname)
@@ -142,6 +145,7 @@ class NODE_MT_custom_add_menu_attribute(MenuBaseClass):
         add_node_type(layout, "GeometryNodeCaptureAttribute")
         add_node_type(layout, "GeometryNodeStoreNamedAttribute")
         add_node_type(layout, "GeometryNodeRemoveAttribute")
+        draw_assets_for_catalog(layout, catalog_path=self.bl_label)
 
 class NODE_MT_custom_add_menu_input(MenuBaseClass):
     bl_label = "Input"
@@ -153,6 +157,7 @@ class NODE_MT_custom_add_menu_input(MenuBaseClass):
         layout.menu(NODE_MT_custom_add_menu_input_scene.bl_idname)
         layout.menu(NODE_MT_custom_add_menu_input_fields.bl_idname)
         layout.menu(NODE_MT_custom_add_menu_input_constants.bl_idname)
+        draw_assets_for_catalog(layout, catalog_path=self.bl_label)
 
 class NODE_MT_custom_add_menu_input_scene(MenuBaseClass):
     bl_label = "Scene"
@@ -200,7 +205,8 @@ class NODE_MT_custom_add_menu_output(MenuBaseClass):
     def draw(self, _context):
         layout = self.layout
         add_node_type(layout, "GeometryNodeViewer")
-
+        draw_assets_for_catalog(layout, catalog_path=self.bl_label)
+        
 class NODE_MT_custom_add_menu_geometry(MenuBaseClass):
     bl_idname = "NODE_MT_custom_add_menu_geometry"
     bl_label = "Geometry"
@@ -227,7 +233,8 @@ class NODE_MT_custom_add_menu_geometry(MenuBaseClass):
         layout.separator(factor=spacing)
         add_node_type(layout, "GeometryNodeSetID")
         add_node_type(layout, "GeometryNodeSetPosition")
-
+        draw_assets_for_catalog(layout, catalog_path=self.bl_label)
+        
 class NODE_MT_custom_add_menu_mesh(MenuBaseClass):
     bl_label = "Mesh"
     bl_idname = "NODE_MT_custom_add_menu_mesh"
@@ -240,7 +247,8 @@ class NODE_MT_custom_add_menu_mesh(MenuBaseClass):
         layout.menu(NODE_MT_custom_add_menu_mesh_setters.bl_idname)
         layout.menu(NODE_MT_custom_add_menu_mesh_primitives.bl_idname)
         layout.menu(NODE_MT_custom_add_menu_mesh_topology.bl_idname)
-
+        draw_assets_for_catalog(layout, catalog_path=self.bl_label)
+        
 class NODE_MT_custom_add_menu_mesh_data(MenuBaseClass):
     bl_label = "Mesh Data"
     bl_idname = "NODE_MT_custom_add_menu_mesh_data"
@@ -312,7 +320,8 @@ class NODE_MT_custom_add_menu_mesh_primitives(MenuBaseClass):
         add_node_type(layout, "GeometryNodeMeshCircle")
         add_node_type(layout, "GeometryNodeMeshLine")
         add_node_type(layout, "GeometryNodeMeshUVSphere")
-
+        draw_assets_for_catalog(layout, catalog_path=self.bl_label)
+        
 class NODE_MT_custom_add_menu_mesh_topology(MenuBaseClass):
     bl_idname = "NODE_MT_custom_add_menu_mesh_topology"
     bl_label = "Mesh Topology"
@@ -328,10 +337,11 @@ class NODE_MT_custom_add_menu_mesh_topology(MenuBaseClass):
         add_node_type(layout, "GeometryNodeFaceOfCorner"),
         add_node_type(layout, "GeometryNodeVertexOfCorner")
         add_node_type(layout, "GeometryNodeOffsetCornerInFace"),
-
-class NODE_MT_custom_add_menu_curves(MenuBaseClass):
+        draw_assets_for_catalog(layout, catalog_path=self.bl_label)
+        
+class NODE_MT_custom_add_menu_curve(MenuBaseClass):
     bl_label = "Curve"
-    bl_idname = "NODE_MT_custom_add_menu_curves"
+    bl_idname = "NODE_MT_custom_add_menu_curve"
 
     def draw(self, context):
         layout = self.layout
@@ -341,7 +351,8 @@ class NODE_MT_custom_add_menu_curves(MenuBaseClass):
         layout.menu(NODE_MT_custom_add_menu_curve_setters.bl_idname)
         layout.menu(NODE_MT_custom_add_menu_curve_primitives.bl_idname)
         layout.menu(NODE_MT_custom_add_menu_curve_topology.bl_idname)
-
+        draw_assets_for_catalog(layout, catalog_path=self.bl_label)
+        
 class NODE_MT_custom_add_menu_curve_data(MenuBaseClass):
     bl_label = "Curve Data"
     bl_idname = "NODE_MT_custom_add_menu_curve_data"
@@ -412,7 +423,8 @@ class NODE_MT_custom_add_menu_curve_primitives(MenuBaseClass):
         add_node_type(layout, "GeometryNodeCurveQuadraticBezier")
         add_node_type(layout, "GeometryNodeCurvePrimitiveQuadrilateral")
         add_node_type(layout, "GeometryNodeCurveStar")
-
+        draw_assets_for_catalog(layout, catalog_path=self.bl_label)
+        
 class NODE_MT_custom_add_menu_curve_topology(MenuBaseClass):
     bl_idname = "NODE_MT_custom_add_menu_curve_topology"
     bl_label = "Curve Topology"
@@ -422,7 +434,8 @@ class NODE_MT_custom_add_menu_curve_topology(MenuBaseClass):
         add_node_type(layout, "GeometryNodeOffsetPointInCurve")
         add_node_type(layout, "GeometryNodeCurveOfPoint")
         add_node_type(layout, "GeometryNodePointsOfCurve")
-
+        draw_assets_for_catalog(layout, catalog_path=self.bl_label)
+        
 class NODE_MT_custom_add_menu_instance(MenuBaseClass):
     bl_idname = "NODE_MT_custom_add_menu_instance"
     bl_label = "Instances"
@@ -439,7 +452,8 @@ class NODE_MT_custom_add_menu_instance(MenuBaseClass):
         layout.separator(factor=spacing)
         add_node_type(layout, "GeometryNodeInputInstanceRotation")
         add_node_type(layout, "GeometryNodeInputInstanceScale")
-
+        draw_assets_for_catalog(layout, catalog_path=self.bl_label)
+        
 class NODE_MT_custom_add_menu_point(MenuBaseClass):
     bl_idname = "NODE_MT_custom_add_menu_point"
     bl_label = "Point"
@@ -454,7 +468,8 @@ class NODE_MT_custom_add_menu_point(MenuBaseClass):
         add_node_type(layout, "GeometryNodePointsToVolume")
         layout.separator(factor=spacing)
         add_node_type(layout, "GeometryNodeSetPointRadius")
-
+        draw_assets_for_catalog(layout, catalog_path=self.bl_label)
+        
 class NODE_MT_custom_add_menu_volume(MenuBaseClass):
     bl_idname = "NODE_MT_custom_add_menu_volume"
     bl_label = "Volume"
@@ -463,7 +478,8 @@ class NODE_MT_custom_add_menu_volume(MenuBaseClass):
         layout = self.layout
         add_node_type(layout, "GeometryNodeVolumeCube")
         add_node_type(layout, "GeometryNodeVolumeToMesh")
-
+        draw_assets_for_catalog(layout, catalog_path=self.bl_label)
+        
 class NODE_MT_custom_add_menu_material(MenuBaseClass):
     bl_idname = "NODE_MT_custom_add_menu_material"
     bl_label = "Material"
@@ -477,7 +493,8 @@ class NODE_MT_custom_add_menu_material(MenuBaseClass):
         layout.separator(factor=spacing)
         add_node_type(layout, "GeometryNodeSetMaterial")
         add_node_type(layout, "GeometryNodeSetMaterialIndex")
-
+        draw_assets_for_catalog(layout, catalog_path=self.bl_label)
+        
 class NODE_MT_custom_add_menu_texture(MenuBaseClass):
     bl_idname = "NODE_MT_custom_add_menu_texture"
     bl_label = "Texture"
@@ -494,7 +511,8 @@ class NODE_MT_custom_add_menu_texture(MenuBaseClass):
         add_node_type(layout, "ShaderNodeTexVoronoi")
         add_node_type(layout, "ShaderNodeTexWave")
         add_node_type(layout, "ShaderNodeTexWhiteNoise")
-
+        draw_assets_for_catalog(layout, catalog_path=self.bl_label)
+        
 class NODE_MT_custom_add_menu_utilities(MenuBaseClass):
     bl_label = "Utilities"
     bl_idname = "NODE_MT_custom_add_menu_utilities"
@@ -508,7 +526,8 @@ class NODE_MT_custom_add_menu_utilities(MenuBaseClass):
         layout.menu(NODE_MT_custom_add_menu_utilities_fields.bl_idname)
         layout.menu(NODE_MT_custom_add_menu_utilities_rotation.bl_idname)
         layout.menu(NODE_MT_custom_add_menu_utilities_converter.bl_idname)
-
+        draw_assets_for_catalog(layout, catalog_path=self.bl_label)
+        
 class NODE_MT_custom_add_menu_utilities_color(MenuBaseClass):
     bl_idname = "NODE_MT_custom_add_menu_utilities_color"
     bl_label = "Color"
@@ -524,7 +543,8 @@ class NODE_MT_custom_add_menu_utilities_color(MenuBaseClass):
         ops.value = "'RGBA'"
         add_node_type(layout, "FunctionNodeCombineColor")
         add_node_type(layout, "FunctionNodeSeparateColor")
-
+        draw_assets_for_catalog(layout, catalog_path=self.bl_label)
+        
 class NODE_MT_custom_add_menu_utilities_string(MenuBaseClass):
     bl_idname = "NODE_MT_custom_add_menu_utilities_string"
     bl_label = "String"
@@ -540,6 +560,7 @@ class NODE_MT_custom_add_menu_utilities_string(MenuBaseClass):
         add_node_type(layout, "FunctionNodeValueToString")
         layout.separator(factor=spacing)
         add_node_type(layout, "FunctionNodeInputSpecialCharacters")
+        draw_assets_for_catalog(layout, catalog_path="Text")        
 
 class NODE_MT_custom_add_menu_utilities_vector(MenuBaseClass):
     bl_idname = "NODE_MT_custom_add_menu_utilities_vector"
@@ -557,7 +578,8 @@ class NODE_MT_custom_add_menu_utilities_vector(MenuBaseClass):
         ops.value = "'VECTOR'"
         add_node_type(layout, "ShaderNodeCombineXYZ")
         add_node_type(layout, "ShaderNodeSeparateXYZ")
-        
+        draw_assets_for_catalog(layout, catalog_path=self.bl_label)
+               
 class NODE_MT_custom_add_menu_utilities_fields(MenuBaseClass):
     bl_label = "Fields"
     bl_idname = "NODE_MT_custom_add_menu_utilities_fields"
@@ -604,7 +626,8 @@ class NODE_MT_custom_add_menu_UV(MenuBaseClass):
         layout = self.layout
         add_node_type(layout, "GeometryNodeUVPackIslands")
         add_node_type(layout, "GeometryNodeUVUnwrap")
-
+        draw_assets_for_catalog(layout, catalog_path=self.bl_label)
+        
 class NODE_MT_custom_add_menu_group(MenuBaseClass):
     bl_idname = "NODE_MT_custom_add_menu_group"
     bl_label = "Group"
@@ -612,7 +635,8 @@ class NODE_MT_custom_add_menu_group(MenuBaseClass):
     def draw(self, context):
         layout = self.layout
         node_add_menu.draw_node_group_add_menu(context, layout)
-
+        draw_assets_for_catalog(layout, catalog_path=self.bl_label)
+        
 class NODE_MT_custom_add_menu_layout(MenuBaseClass):
     bl_idname = "NODE_MT_custom_add_menu_layout"
     bl_label = "Layout"
@@ -621,7 +645,8 @@ class NODE_MT_custom_add_menu_layout(MenuBaseClass):
         layout = self.layout
         add_node_type(layout, "NodeFrame")
         add_node_type(layout, "NodeReroute")
-
+        draw_assets_for_catalog(layout, catalog_path=self.bl_label)
+        
 class NODE_OT_INVOKE_MENU(bpy.types.Operator):
     bl_label = "Invoke Custom Add Menu"
     bl_idname = "custom_add_menu.invoke_menu"
@@ -657,7 +682,7 @@ classes = (
         NODE_MT_custom_add_menu_mesh_setters,
         NODE_MT_custom_add_menu_mesh_primitives,
         NODE_MT_custom_add_menu_mesh_topology,
-        NODE_MT_custom_add_menu_curves,
+        NODE_MT_custom_add_menu_curve,
         NODE_MT_custom_add_menu_curve_data,
         NODE_MT_custom_add_menu_curve_operations,
         NODE_MT_custom_add_menu_curve_setters,
