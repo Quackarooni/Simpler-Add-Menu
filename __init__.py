@@ -657,6 +657,22 @@ class NODE_MT_custom_add_menu_layout(MenuBaseClass):
         add_node_type(layout, "NodeReroute")
         draw_assets_for_catalog(layout, catalog_path=self.bl_label)
         
+class NODE_MT_custom_header_menus(bpy.types.Menu):
+    bl_idname = "NODE_MT_editor_menus"
+    bl_label = ""
+
+    def draw(self, context):
+        layout = self.layout
+        layout.menu("NODE_MT_view")
+        layout.menu("NODE_MT_select")
+
+        if context.space_data.tree_type == "GeometryNodeTree":
+            layout.menu("NODE_MT_custom_add_menu")
+        else:
+            layout.menu("NODE_MT_add")
+
+        layout.menu("NODE_MT_node")
+
 class NODE_OT_INVOKE_MENU(bpy.types.Operator):
     bl_label = "Invoke Custom Add Menu"
     bl_idname = "custom_add_menu.invoke_menu"
@@ -720,6 +736,9 @@ addon_keymaps = []
 
 def register():
     prefs.register()
+        
+    NODE_MT_editor_menus = NODE_MT_custom_header_menus
+    bpy.utils.register_class(NODE_MT_editor_menus)
 
     for cls in classes:
         bpy.utils.register_class(cls)
@@ -734,8 +753,10 @@ def register():
         key_entry = key_map.keymap_items.new(NODE_OT_INVOKE_MENU.bl_idname, 'A', value='PRESS', shift=True)
         addon_keymaps.append((key_map, key_entry))    
 
+
 def unregister():
     prefs.unregister()
+
 
     for draw_func in addon_draw_funcs:
         bpy.types.NODE_MT_custom_add_menu.remove(draw_func)
@@ -747,3 +768,5 @@ def unregister():
         key_map.keymap_items.remove(key_entry)
     addon_keymaps.clear()
 
+    from bl_ui import space_node
+    bpy.utils.register_class(space_node.NODE_MT_editor_menus)
