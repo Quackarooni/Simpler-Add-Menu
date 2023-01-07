@@ -16,7 +16,7 @@ bl_info = {
     "author": "Quackers",
     "description": "Addon for a slightly more cleaner and organized geometry nodes add menu",
     "blender": (3, 4, 0),
-    "version": (0, 1, 0),
+    "version": (0, 2, 0),
     "location": "Shader Editor > Add",
     "category": "Node",
 }
@@ -33,9 +33,9 @@ def register():
 
     if key_config := bpy.context.window_manager.keyconfigs.addon:
         key_map = key_config.keymaps.new(name='Node Editor', space_type="NODE_EDITOR")
-        key_entry = key_map.keymap_items.new(menus.NODE_OT_INVOKE_MENU.bl_idname, 'A', value='PRESS', shift=True)
+        key_entry = key_map.keymap_items.new(
+            menus.NODE_OT_INVOKE_MENU.bl_idname, 'A', value='PRESS', shift=True)
         addon_keymaps.append((key_map, key_entry))    
-
 
 def unregister():
     prefs.unregister()
