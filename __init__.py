@@ -16,7 +16,7 @@ bl_info = {
     "author": "Quackers",
     "description": "Addon for a slightly more cleaner and organized geometry nodes add menu",
     "blender": (3, 4, 0),
-    "version": (0, 2, 0),
+    "version": (0, 3, 0),
     "location": "Shader Editor > Add",
     "category": "Node",
 }
