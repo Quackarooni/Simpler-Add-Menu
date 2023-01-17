@@ -7,7 +7,7 @@ menu_classes = []
 addon_draw_funcs = []
 dir_path = Path(__file__).parent
 spacing = 0.65
-subcategory_spacing = spacing*2
+subcategory_spacing = spacing*1
 
 from bpy.app.translations import (
     pgettext_iface as iface_,
