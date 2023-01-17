@@ -7,6 +7,7 @@ menu_classes = []
 addon_draw_funcs = []
 dir_path = Path(__file__).parent
 spacing = 0.65
+subcategory_spacing = spacing*2
 
 from bpy.app.translations import (
     pgettext_iface as iface_,
@@ -139,9 +140,26 @@ class NODE_MT_custom_add_menu_input(MenuBaseClass):
     def draw(self, context):
         layout = self.layout
         layout.operator_context = 'INVOKE_DEFAULT'
-        layout.menu(NODE_MT_custom_add_menu_input_scene.bl_idname)
-        layout.menu(NODE_MT_custom_add_menu_input_fields.bl_idname)
-        layout.menu(NODE_MT_custom_add_menu_input_constants.bl_idname)
+        prefs = fetch_user_preferences()
+
+        if prefs.ui_mode == "COMPACT":
+            layout.menu(NODE_MT_custom_add_menu_input_scene.bl_idname)
+            layout.menu(NODE_MT_custom_add_menu_input_fields.bl_idname)
+            layout.menu(NODE_MT_custom_add_menu_input_constants.bl_idname)
+        else:
+            row = layout.row()
+            submenus = (
+                NODE_MT_custom_add_menu_input_scene,
+                NODE_MT_custom_add_menu_input_fields,
+                NODE_MT_custom_add_menu_input_constants,
+            )
+
+            for submenu in submenus:
+                col = row.column()
+                col.label(text=submenu.bl_label)
+                col.separator(factor=spacing)
+                col.menu_contents(submenu.bl_idname)         
+        
         draw_assets_for_catalog(layout, catalog_path=self.bl_label)
 
 class NODE_MT_custom_add_menu_input_scene(MenuBaseClass):
@@ -227,15 +245,46 @@ class NODE_MT_custom_add_menu_mesh(MenuBaseClass):
     def draw(self, context):
         layout = self.layout
         layout.operator_context = 'INVOKE_DEFAULT'
-        layout.menu(NODE_MT_custom_add_menu_mesh_data.bl_idname)
-        layout.menu(NODE_MT_custom_add_menu_mesh_operations.bl_idname)
-        layout.menu(NODE_MT_custom_add_menu_mesh_setters.bl_idname)
-        layout.menu(NODE_MT_custom_add_menu_mesh_primitives.bl_idname)
-        layout.menu(NODE_MT_custom_add_menu_mesh_topology.bl_idname)
+        prefs = fetch_user_preferences()
+
+        if prefs.ui_mode == "COMPACT":
+            layout.menu(NODE_MT_custom_add_menu_mesh_data.bl_idname)
+            layout.menu(NODE_MT_custom_add_menu_mesh_setters.bl_idname)
+            layout.separator(factor=spacing)
+            layout.menu(NODE_MT_custom_add_menu_mesh_operations.bl_idname)
+            layout.menu(NODE_MT_custom_add_menu_mesh_primitives.bl_idname)
+            layout.menu(NODE_MT_custom_add_menu_mesh_topology.bl_idname)
+        else:
+            row = layout.row()
+            col = row.column()
+            col.label(text=NODE_MT_custom_add_menu_mesh_data.bl_label)
+            col.separator(factor=spacing)
+            col.menu_contents(NODE_MT_custom_add_menu_mesh_data.bl_idname)
+
+            col.separator(factor=subcategory_spacing)
+            col.label(text=NODE_MT_custom_add_menu_mesh_setters.bl_label)
+            col.separator(factor=spacing)
+            col.menu_contents(NODE_MT_custom_add_menu_mesh_setters.bl_idname)
+            
+            col = row.column()
+            col.label(text=NODE_MT_custom_add_menu_mesh_operations.bl_label)
+            col.separator(factor=spacing)
+            col.menu_contents(NODE_MT_custom_add_menu_mesh_operations.bl_idname)
+
+            col = row.column()
+            col.label(text=NODE_MT_custom_add_menu_mesh_primitives.bl_label)
+            col.separator(factor=spacing)
+            col.menu_contents(NODE_MT_custom_add_menu_mesh_primitives.bl_idname)
+
+            col.separator(factor=subcategory_spacing)
+            col.label(text=NODE_MT_custom_add_menu_mesh_topology.bl_label)
+            col.separator(factor=spacing)
+            col.menu_contents(NODE_MT_custom_add_menu_mesh_topology.bl_idname)
+
         draw_assets_for_catalog(layout, catalog_path=self.bl_label)
         
 class NODE_MT_custom_add_menu_mesh_data(MenuBaseClass):
-    bl_label = "Mesh Data"
+    bl_label = "Get Mesh Data"
     bl_idname = "NODE_MT_custom_add_menu_mesh_data"
 
     def draw(self, context):
@@ -284,7 +333,7 @@ class NODE_MT_custom_add_menu_mesh_operations(MenuBaseClass):
         add_node_type(layout, "GeometryNodeTriangulate")
 
 class NODE_MT_custom_add_menu_mesh_setters(MenuBaseClass):
-    bl_label = "Mesh Setters"
+    bl_label = "Set Mesh Data"
     bl_idname = "NODE_MT_custom_add_menu_mesh_setters"
 
     def draw(self, context):
@@ -331,15 +380,46 @@ class NODE_MT_custom_add_menu_curve(MenuBaseClass):
     def draw(self, context):
         layout = self.layout
         layout.operator_context = 'INVOKE_DEFAULT'
-        layout.menu(NODE_MT_custom_add_menu_curve_data.bl_idname)
-        layout.menu(NODE_MT_custom_add_menu_curve_operations.bl_idname)
-        layout.menu(NODE_MT_custom_add_menu_curve_setters.bl_idname)
-        layout.menu(NODE_MT_custom_add_menu_curve_primitives.bl_idname)
-        layout.menu(NODE_MT_custom_add_menu_curve_topology.bl_idname)
+        prefs = fetch_user_preferences()
+
+        if prefs.ui_mode == "COMPACT":
+            layout.menu(NODE_MT_custom_add_menu_curve_data.bl_idname)
+            layout.menu(NODE_MT_custom_add_menu_curve_setters.bl_idname)
+            layout.separator(factor=spacing)
+            layout.menu(NODE_MT_custom_add_menu_curve_operations.bl_idname)
+            layout.menu(NODE_MT_custom_add_menu_curve_primitives.bl_idname)
+            layout.menu(NODE_MT_custom_add_menu_curve_topology.bl_idname)
+        else:
+            row = layout.row()
+            col = row.column()
+            col.label(text=NODE_MT_custom_add_menu_curve_data.bl_label)
+            col.separator(factor=spacing)
+            col.menu_contents(NODE_MT_custom_add_menu_curve_data.bl_idname)
+
+            col = row.column()
+            col.label(text=NODE_MT_custom_add_menu_curve_setters.bl_label)
+            col.separator(factor=spacing)
+            col.menu_contents(NODE_MT_custom_add_menu_curve_setters.bl_idname)
+            
+            col = row.column()
+            col.label(text=NODE_MT_custom_add_menu_curve_operations.bl_label)
+            col.separator(factor=spacing)
+            col.menu_contents(NODE_MT_custom_add_menu_curve_operations.bl_idname)
+
+            col = row.column()
+            col.label(text=NODE_MT_custom_add_menu_curve_primitives.bl_label)
+            col.separator(factor=spacing)
+            col.menu_contents(NODE_MT_custom_add_menu_curve_primitives.bl_idname)
+
+            col.separator(factor=subcategory_spacing)
+            col.label(text=NODE_MT_custom_add_menu_curve_topology.bl_label)
+            col.separator(factor=spacing)
+            col.menu_contents(NODE_MT_custom_add_menu_curve_topology.bl_idname)
+
         draw_assets_for_catalog(layout, catalog_path=self.bl_label)
         
 class NODE_MT_custom_add_menu_curve_data(MenuBaseClass):
-    bl_label = "Curve Data"
+    bl_label = "Get Curve Data"
     bl_idname = "NODE_MT_custom_add_menu_curve_data"
 
     def draw(self, context):
@@ -378,7 +458,7 @@ class NODE_MT_custom_add_menu_curve_operations(MenuBaseClass):
         add_node_type(layout, "GeometryNodeDeformCurvesOnSurface")
 
 class NODE_MT_custom_add_menu_curve_setters(MenuBaseClass):
-    bl_label = "Curve Setters"
+    bl_label = "Set Curve Data"
     bl_idname = "NODE_MT_custom_add_menu_curve_setters"
 
     def draw(self, context):
@@ -504,15 +584,51 @@ class NODE_MT_custom_add_menu_utilities(MenuBaseClass):
 
     def draw(self, context):
         layout = self.layout
-        layout.menu(NODE_MT_custom_add_menu_utilities_color.bl_idname)
-        layout.menu(NODE_MT_custom_add_menu_utilities_string.bl_idname)
-        layout.menu(NODE_MT_custom_add_menu_utilities_vector.bl_idname)
-        layout.separator(factor=spacing)
-        layout.menu(NODE_MT_custom_add_menu_utilities_fields.bl_idname)
-        layout.menu(NODE_MT_custom_add_menu_utilities_rotation.bl_idname)
-        layout.menu(NODE_MT_custom_add_menu_utilities_converter.bl_idname)
+        layout.operator_context = 'INVOKE_DEFAULT'
+        prefs = fetch_user_preferences()
+
+        if prefs.ui_mode == "COMPACT":
+            layout.menu(NODE_MT_custom_add_menu_utilities_color.bl_idname)
+            layout.menu(NODE_MT_custom_add_menu_utilities_string.bl_idname)
+            layout.menu(NODE_MT_custom_add_menu_utilities_vector.bl_idname)
+            layout.separator(factor=spacing)
+            layout.menu(NODE_MT_custom_add_menu_utilities_fields.bl_idname)
+            layout.menu(NODE_MT_custom_add_menu_utilities_rotation.bl_idname)
+            layout.menu(NODE_MT_custom_add_menu_utilities_converter.bl_idname)
+        else:
+            row = layout.row()
+            col = row.column()
+            col.label(text=NODE_MT_custom_add_menu_utilities_color.bl_label)
+            col.separator(factor=spacing)
+            col.menu_contents(NODE_MT_custom_add_menu_utilities_color.bl_idname)
+            
+            col.separator(factor=subcategory_spacing)
+            col.label(text=NODE_MT_custom_add_menu_utilities_fields.bl_label)
+            col.separator(factor=spacing)
+            col.menu_contents(NODE_MT_custom_add_menu_utilities_fields.bl_idname)
+
+            col = row.column()
+            col.label(text=NODE_MT_custom_add_menu_utilities_string.bl_label)
+            col.separator(factor=spacing)
+            col.menu_contents(NODE_MT_custom_add_menu_utilities_string.bl_idname)
+
+            col = row.column()
+            col.label(text=NODE_MT_custom_add_menu_utilities_vector.bl_label)
+            col.separator(factor=spacing)
+            col.menu_contents(NODE_MT_custom_add_menu_utilities_vector.bl_idname)
+            
+            col.separator(factor=subcategory_spacing)
+            col.label(text=NODE_MT_custom_add_menu_utilities_rotation.bl_label)
+            col.separator(factor=spacing)
+            col.menu_contents(NODE_MT_custom_add_menu_utilities_rotation.bl_idname)
+
+            col = row.column()
+            col.label(text=NODE_MT_custom_add_menu_utilities_converter.bl_label)
+            col.separator(factor=spacing)
+            col.menu_contents(NODE_MT_custom_add_menu_utilities_converter.bl_idname)
+
         draw_assets_for_catalog(layout, catalog_path=self.bl_label)
-        
+
 class NODE_MT_custom_add_menu_utilities_color(MenuBaseClass):
     bl_idname = "NODE_MT_custom_add_menu_utilities_color"
     bl_label = "Color"
