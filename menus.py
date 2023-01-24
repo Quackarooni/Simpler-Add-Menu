@@ -91,10 +91,29 @@ class SubmenuBaseClass():
     @staticmethod
     def draw_compact(layout, items):
         for item in items:
+            if item == "CombineMenu":
+                raise ValueError
+
             if item == "SeparateMenu":
                 layout.separator(factor=spacing)
             else:
-                layout.menu(item)
+                layout.menu(item.bl_idname)
+
+    @staticmethod
+    def draw_expanded(layout, items):
+        row = layout.row()
+        for item in items:
+            if item == "SeparateMenu":
+                raise ValueError
+
+            if item != "CombineMenu":
+                col = row.column()
+            else:
+                col.separator(factor=spacing)
+
+            col.label(text=item.bl_label)
+            col.separator(factor=spacing)
+            col.menu_contents(item.bl_idname)
 
 
 class NODE_MT_custom_add_menu(MenuBaseClass):
@@ -190,9 +209,9 @@ class NODE_MT_custom_add_menu_input(MenuBaseClass, SubmenuBaseClass):
     bl_idname = "NODE_MT_custom_add_menu_input"
 
     items_compact = [
-            NODE_MT_custom_add_menu_input_scene.bl_idname,
-            NODE_MT_custom_add_menu_input_fields.bl_idname,
-            NODE_MT_custom_add_menu_input_constants.bl_idname,
+            NODE_MT_custom_add_menu_input_scene,
+            NODE_MT_custom_add_menu_input_fields,
+            NODE_MT_custom_add_menu_input_constants,
             ]
 
     def draw(self, context):
@@ -350,12 +369,12 @@ class NODE_MT_custom_add_menu_mesh(MenuBaseClass, SubmenuBaseClass):
     bl_idname = "NODE_MT_custom_add_menu_mesh"
 
     items_compact = [
-            NODE_MT_custom_add_menu_mesh_data.bl_idname,
-            NODE_MT_custom_add_menu_mesh_setters.bl_idname,
+            NODE_MT_custom_add_menu_mesh_data,
+            NODE_MT_custom_add_menu_mesh_setters,
             "SeparateMenu",
-            NODE_MT_custom_add_menu_mesh_operations.bl_idname,
-            NODE_MT_custom_add_menu_mesh_primitives.bl_idname,
-            NODE_MT_custom_add_menu_mesh_topology.bl_idname,
+            NODE_MT_custom_add_menu_mesh_operations,
+            NODE_MT_custom_add_menu_mesh_primitives,
+            NODE_MT_custom_add_menu_mesh_topology,
             ]
 
     def draw(self, context):
@@ -482,12 +501,12 @@ class NODE_MT_custom_add_menu_curve(MenuBaseClass, SubmenuBaseClass):
     bl_idname = "NODE_MT_custom_add_menu_curve"
 
     items_compact = [
-        NODE_MT_custom_add_menu_curve_data.bl_idname,
-        NODE_MT_custom_add_menu_curve_setters.bl_idname,
+        NODE_MT_custom_add_menu_curve_data,
+        NODE_MT_custom_add_menu_curve_setters,
         "SeparateMenu",
-        NODE_MT_custom_add_menu_curve_operations.bl_idname,
-        NODE_MT_custom_add_menu_curve_primitives.bl_idname,
-        NODE_MT_custom_add_menu_curve_topology.bl_idname,
+        NODE_MT_custom_add_menu_curve_operations,
+        NODE_MT_custom_add_menu_curve_primitives,
+        NODE_MT_custom_add_menu_curve_topology,
         ]
         
     def draw(self, context):
@@ -698,13 +717,13 @@ class NODE_MT_custom_add_menu_utilities(MenuBaseClass, SubmenuBaseClass):
     bl_idname = "NODE_MT_custom_add_menu_utilities"
 
     items_compact = [
-            NODE_MT_custom_add_menu_utilities_color.bl_idname,
-            NODE_MT_custom_add_menu_utilities_string.bl_idname,
-            NODE_MT_custom_add_menu_utilities_vector.bl_idname,
+            NODE_MT_custom_add_menu_utilities_color,
+            NODE_MT_custom_add_menu_utilities_string,
+            NODE_MT_custom_add_menu_utilities_vector,
             "SeparateMenu",
-            NODE_MT_custom_add_menu_utilities_fields.bl_idname,
-            NODE_MT_custom_add_menu_utilities_rotation.bl_idname,
-            NODE_MT_custom_add_menu_utilities_converter.bl_idname,
+            NODE_MT_custom_add_menu_utilities_fields,
+            NODE_MT_custom_add_menu_utilities_rotation,
+            NODE_MT_custom_add_menu_utilities_converter,
         ]
 
     def draw(self, context):
