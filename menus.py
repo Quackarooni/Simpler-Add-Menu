@@ -81,8 +81,8 @@ class MenuBaseClass(bpy.types.Menu):
     def poll(cls, context):
         return context.space_data.tree_type == 'GeometryNodeTree'
 
-    def draw(self, context):
-        pass
+    #def draw(self, context):
+    #   pass
 
 class SubmenuBaseClass():
     items_compact = []
@@ -102,19 +102,38 @@ class SubmenuBaseClass():
     @staticmethod
     def draw_expanded(layout, items):
         row = layout.row()
+        col = None
+
+        combine_next_menu = False
         for item in items:
             if item == "SeparateMenu":
                 raise ValueError
 
-            if item != "CombineMenu":
-                col = row.column()
+            if item == "CombineMenu":
+                combine_next_menu = True
+                continue
+
+            if combine_next_menu:
+                col.separator(factor=submenu_spacing)
+                combine_next_menu = False
             else:
-                col.separator(factor=spacing)
+                col = row.column()
 
             col.label(text=item.bl_label)
             col.separator(factor=spacing)
             col.menu_contents(item.bl_idname)
 
+    def draw(self, context):
+        layout = self.layout
+        layout.operator_context = 'INVOKE_DEFAULT'
+        prefs = fetch_user_preferences()
+
+        if prefs.ui_mode == "COMPACT":
+            self.draw_compact(layout, items=self.items_compact)
+        else:
+            self.draw_expanded(layout, items=self.items_expanded)  
+        
+        draw_assets_for_catalog(layout, catalog_path=self.bl_label)
 
 class NODE_MT_custom_add_menu(MenuBaseClass):
     bl_label = "Add"
@@ -213,29 +232,8 @@ class NODE_MT_custom_add_menu_input(MenuBaseClass, SubmenuBaseClass):
             NODE_MT_custom_add_menu_input_fields,
             NODE_MT_custom_add_menu_input_constants,
             ]
-
-    def draw(self, context):
-        layout = self.layout
-        layout.operator_context = 'INVOKE_DEFAULT'
-        prefs = fetch_user_preferences()
-
-        if prefs.ui_mode == "COMPACT":
-            self.draw_compact(layout, items=self.items_compact)
-        else:
-            row = layout.row()
-            submenus = (
-                NODE_MT_custom_add_menu_input_scene,
-                NODE_MT_custom_add_menu_input_fields,
-                NODE_MT_custom_add_menu_input_constants,
-            )
-
-            for submenu in submenus:
-                col = row.column()
-                col.label(text=submenu.bl_label)
-                col.separator(factor=spacing)
-                col.menu_contents(submenu.bl_idname)         
-        
-        draw_assets_for_catalog(layout, catalog_path=self.bl_label)
+    
+    items_expanded = items_compact
 
 class NODE_MT_custom_add_menu_output(MenuBaseClass):
     bl_idname = "NODE_MT_custom_add_menu_output"
@@ -377,41 +375,15 @@ class NODE_MT_custom_add_menu_mesh(MenuBaseClass, SubmenuBaseClass):
             NODE_MT_custom_add_menu_mesh_topology,
             ]
 
-    def draw(self, context):
-        layout = self.layout
-        layout.operator_context = 'INVOKE_DEFAULT'
-        prefs = fetch_user_preferences()
-
-        if prefs.ui_mode == "COMPACT":
-            self.draw_compact(layout, items=self.items_compact)
-        else:
-            row = layout.row()
-            col = row.column()
-            col.label(text=NODE_MT_custom_add_menu_mesh_data.bl_label)
-            col.separator(factor=spacing)
-            col.menu_contents(NODE_MT_custom_add_menu_mesh_data.bl_idname)
-
-            col.separator(factor=subcategory_spacing)
-            col.label(text=NODE_MT_custom_add_menu_mesh_setters.bl_label)
-            col.separator(factor=spacing)
-            col.menu_contents(NODE_MT_custom_add_menu_mesh_setters.bl_idname)
-            
-            col = row.column()
-            col.label(text=NODE_MT_custom_add_menu_mesh_operations.bl_label)
-            col.separator(factor=spacing)
-            col.menu_contents(NODE_MT_custom_add_menu_mesh_operations.bl_idname)
-
-            col = row.column()
-            col.label(text=NODE_MT_custom_add_menu_mesh_primitives.bl_label)
-            col.separator(factor=spacing)
-            col.menu_contents(NODE_MT_custom_add_menu_mesh_primitives.bl_idname)
-
-            col.separator(factor=subcategory_spacing)
-            col.label(text=NODE_MT_custom_add_menu_mesh_topology.bl_label)
-            col.separator(factor=spacing)
-            col.menu_contents(NODE_MT_custom_add_menu_mesh_topology.bl_idname)
-
-        draw_assets_for_catalog(layout, catalog_path=self.bl_label)
+    items_expanded = [
+            NODE_MT_custom_add_menu_mesh_data,
+            "CombineMenu",
+            NODE_MT_custom_add_menu_mesh_setters,
+            NODE_MT_custom_add_menu_mesh_operations,
+            NODE_MT_custom_add_menu_mesh_primitives,
+            "CombineMenu",
+            NODE_MT_custom_add_menu_mesh_topology,
+            ]
 
 class NODE_MT_custom_add_menu_curve_data(MenuBaseClass):
     bl_label = "Get Curve Data"
@@ -508,42 +480,15 @@ class NODE_MT_custom_add_menu_curve(MenuBaseClass, SubmenuBaseClass):
         NODE_MT_custom_add_menu_curve_primitives,
         NODE_MT_custom_add_menu_curve_topology,
         ]
-        
-    def draw(self, context):
-        layout = self.layout
-        layout.operator_context = 'INVOKE_DEFAULT'
-        prefs = fetch_user_preferences()
-
-        if prefs.ui_mode == "COMPACT":
-            self.draw_compact(layout, items=self.items_compact)
-        else:
-            row = layout.row()
-            col = row.column()
-            col.label(text=NODE_MT_custom_add_menu_curve_data.bl_label)
-            col.separator(factor=spacing)
-            col.menu_contents(NODE_MT_custom_add_menu_curve_data.bl_idname)
-
-            col = row.column()
-            col.label(text=NODE_MT_custom_add_menu_curve_setters.bl_label)
-            col.separator(factor=spacing)
-            col.menu_contents(NODE_MT_custom_add_menu_curve_setters.bl_idname)
-            
-            col = row.column()
-            col.label(text=NODE_MT_custom_add_menu_curve_operations.bl_label)
-            col.separator(factor=spacing)
-            col.menu_contents(NODE_MT_custom_add_menu_curve_operations.bl_idname)
-
-            col = row.column()
-            col.label(text=NODE_MT_custom_add_menu_curve_primitives.bl_label)
-            col.separator(factor=spacing)
-            col.menu_contents(NODE_MT_custom_add_menu_curve_primitives.bl_idname)
-
-            col.separator(factor=subcategory_spacing)
-            col.label(text=NODE_MT_custom_add_menu_curve_topology.bl_label)
-            col.separator(factor=spacing)
-            col.menu_contents(NODE_MT_custom_add_menu_curve_topology.bl_idname)
-
-        draw_assets_for_catalog(layout, catalog_path=self.bl_label)
+    
+    items_expanded = [
+        NODE_MT_custom_add_menu_curve_data,
+        NODE_MT_custom_add_menu_curve_setters,
+        NODE_MT_custom_add_menu_curve_operations,
+        NODE_MT_custom_add_menu_curve_primitives,
+        "CombineMenu",
+        NODE_MT_custom_add_menu_curve_topology,
+        ]
 
 class NODE_MT_custom_add_menu_instance(MenuBaseClass):
     bl_idname = "NODE_MT_custom_add_menu_instance"
@@ -726,46 +671,16 @@ class NODE_MT_custom_add_menu_utilities(MenuBaseClass, SubmenuBaseClass):
             NODE_MT_custom_add_menu_utilities_converter,
         ]
 
-    def draw(self, context):
-        layout = self.layout
-        layout.operator_context = 'INVOKE_DEFAULT'
-        prefs = fetch_user_preferences()
-
-        if prefs.ui_mode == "COMPACT":
-            self.draw_compact(layout, items=self.items_compact)
-        else:
-            row = layout.row()
-            col = row.column()
-            col.label(text=NODE_MT_custom_add_menu_utilities_color.bl_label)
-            col.separator(factor=spacing)
-            col.menu_contents(NODE_MT_custom_add_menu_utilities_color.bl_idname)
-            
-            col.separator(factor=subcategory_spacing)
-            col.label(text=NODE_MT_custom_add_menu_utilities_fields.bl_label)
-            col.separator(factor=spacing)
-            col.menu_contents(NODE_MT_custom_add_menu_utilities_fields.bl_idname)
-
-            col = row.column()
-            col.label(text=NODE_MT_custom_add_menu_utilities_string.bl_label)
-            col.separator(factor=spacing)
-            col.menu_contents(NODE_MT_custom_add_menu_utilities_string.bl_idname)
-
-            col = row.column()
-            col.label(text=NODE_MT_custom_add_menu_utilities_vector.bl_label)
-            col.separator(factor=spacing)
-            col.menu_contents(NODE_MT_custom_add_menu_utilities_vector.bl_idname)
-            
-            col.separator(factor=subcategory_spacing)
-            col.label(text=NODE_MT_custom_add_menu_utilities_rotation.bl_label)
-            col.separator(factor=spacing)
-            col.menu_contents(NODE_MT_custom_add_menu_utilities_rotation.bl_idname)
-
-            col = row.column()
-            col.label(text=NODE_MT_custom_add_menu_utilities_converter.bl_label)
-            col.separator(factor=spacing)
-            col.menu_contents(NODE_MT_custom_add_menu_utilities_converter.bl_idname)
-
-        draw_assets_for_catalog(layout, catalog_path=self.bl_label)
+    items_expanded = [
+            NODE_MT_custom_add_menu_utilities_color,
+            "CombineMenu",
+            NODE_MT_custom_add_menu_utilities_fields,
+            NODE_MT_custom_add_menu_utilities_string,
+            NODE_MT_custom_add_menu_utilities_vector,
+            "CombineMenu",
+            NODE_MT_custom_add_menu_utilities_rotation,
+            NODE_MT_custom_add_menu_utilities_converter,
+        ]
 
 class NODE_MT_custom_add_menu_UV(MenuBaseClass):
     bl_idname = "NODE_MT_custom_add_menu_UV"
