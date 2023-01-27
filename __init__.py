@@ -24,26 +24,15 @@ bl_info = {
 import bpy
 from . import menus, header, prefs
 
-addon_keymaps = []
-
 def register():
     prefs.register()
     header.register()        
     menus.register()
-
-    if key_config := bpy.context.window_manager.keyconfigs.addon:
-        key_map = key_config.keymaps.new(name='Node Editor', space_type="NODE_EDITOR")
-        key_entry = key_map.keymap_items.new(
-            menus.NODE_OT_INVOKE_MENU.bl_idname, 'A', value='PRESS', shift=True)
-        addon_keymaps.append((key_map, key_entry))    
 
 def unregister():
     prefs.unregister()
     header.unregister()
     menus.unregister()
 
-    for key_map, key_entry in addon_keymaps:
-        key_map.keymap_items.remove(key_entry)
-    addon_keymaps.clear()
 
 
