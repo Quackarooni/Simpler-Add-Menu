@@ -3,6 +3,7 @@ from pathlib import Path
 
 dir_path = Path(__file__).parent.parent
 spacing = 0.65
+subcategory_spacing = spacing*1
 
 from bpy.app.translations import (
     pgettext_iface as iface_,
