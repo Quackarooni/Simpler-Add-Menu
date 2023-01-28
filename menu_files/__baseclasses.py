@@ -32,10 +32,11 @@ class BaseSubmenu():
             if item == "SeparateMenu":
                 layout.separator(factor=spacing)
             else:
+                item = getattr(bpy.types, item)
                 layout.menu(item.bl_idname)
 
-    @staticmethod
-    def draw_expanded(layout, items):
+    #@staticmethod
+    def draw_expanded(self, layout, items):
         row = layout.row()
         col = None
 
@@ -47,6 +48,8 @@ class BaseSubmenu():
             if item == "CombineMenu":
                 combine_next_menu = True
                 continue
+
+            item = getattr(bpy.types, item)
 
             if combine_next_menu:
                 col.separator(factor=subcategory_spacing)
