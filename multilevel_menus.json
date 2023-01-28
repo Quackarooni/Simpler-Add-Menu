@@ -1,0 +1,76 @@
+{
+    "NODE_MT_custom_add_menu_input": {
+        "bl_label": "Input",
+        "items_compact": [
+            "NODE_MT_custom_add_menu_input_scene",
+            "NODE_MT_custom_add_menu_input_fields",
+            "NODE_MT_custom_add_menu_input_constants"
+        ],
+        "items_expanded": [
+            "NODE_MT_custom_add_menu_input_scene",
+            "NODE_MT_custom_add_menu_input_fields",
+            "NODE_MT_custom_add_menu_input_constants"
+        ]
+    },
+    "NODE_MT_custom_add_menu_mesh": {
+        "bl_label": "Mesh",
+        "items_compact": [
+            "NODE_MT_custom_add_menu_mesh_data",
+            "NODE_MT_custom_add_menu_mesh_setters",
+            "SeparateMenu",
+            "NODE_MT_custom_add_menu_mesh_operations",
+            "NODE_MT_custom_add_menu_mesh_primitives",
+            "NODE_MT_custom_add_menu_mesh_topology"
+        ],
+        "items_expanded": [
+            "NODE_MT_custom_add_menu_mesh_data",
+            "CombineMenu",
+            "NODE_MT_custom_add_menu_mesh_setters",
+            "NODE_MT_custom_add_menu_mesh_operations",
+            "NODE_MT_custom_add_menu_mesh_primitives",
+            "CombineMenu",
+            "NODE_MT_custom_add_menu_mesh_topology"
+        ]
+    },
+    "NODE_MT_custom_add_menu_curve": {
+        "bl_label": "Curve",
+        "items_compact": [
+            "NODE_MT_custom_add_menu_curve_data",
+            "NODE_MT_custom_add_menu_curve_setters",
+            "SeparateMenu",
+            "NODE_MT_custom_add_menu_curve_operations",
+            "NODE_MT_custom_add_menu_curve_primitives",
+            "NODE_MT_custom_add_menu_curve_topology"
+        ],
+        "items_expanded": [
+            "NODE_MT_custom_add_menu_curve_data",
+            "NODE_MT_custom_add_menu_curve_setters",
+            "NODE_MT_custom_add_menu_curve_operations",
+            "NODE_MT_custom_add_menu_curve_primitives",
+            "CombineMenu",
+            "NODE_MT_custom_add_menu_curve_topology"
+        ]
+    },
+    "NODE_MT_custom_add_menu_utilities": {
+        "bl_label": "Utilities",
+        "items_compact": [
+            "NODE_MT_custom_add_menu_utilities_color",
+            "NODE_MT_custom_add_menu_utilities_string",
+            "NODE_MT_custom_add_menu_utilities_vector",
+            "SeparateMenu",
+            "NODE_MT_custom_add_menu_utilities_fields",
+            "NODE_MT_custom_add_menu_utilities_rotation",
+            "NODE_MT_custom_add_menu_utilities_converter"
+        ],
+        "items_expanded": [
+            "NODE_MT_custom_add_menu_utilities_color",
+            "CombineMenu",
+            "NODE_MT_custom_add_menu_utilities_fields",
+            "NODE_MT_custom_add_menu_utilities_string",
+            "NODE_MT_custom_add_menu_utilities_vector",
+            "CombineMenu",
+            "NODE_MT_custom_add_menu_utilities_rotation",
+            "NODE_MT_custom_add_menu_utilities_converter"
+        ]
+    }
+}
