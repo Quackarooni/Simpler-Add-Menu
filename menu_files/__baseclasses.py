@@ -19,7 +19,7 @@ class BaseMenu(bpy.types.Menu):
     #def draw(self, context):
     #   pass
 
-class BaseSubmenu():
+class BaseMultilevelMenu():
     items_compact = []
     items_expanded = []
 

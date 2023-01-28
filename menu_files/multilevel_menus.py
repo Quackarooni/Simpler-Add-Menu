@@ -1,13 +1,13 @@
 import bpy
 import json
 from .__globals import dir_path
-from .__baseclasses import BaseMenu, BaseSubmenu
+from .__baseclasses import BaseMenu, BaseMultilevelMenu
 
 classes = []
 
 def generate_multilevel_menu(idname, props):
     props["bl_idname"] = idname
-    menu_class = type(idname,(BaseMenu, BaseSubmenu), props)
+    menu_class = type(idname,(BaseMenu, BaseMultilevelMenu), props)
     return menu_class
 
 def register():  
