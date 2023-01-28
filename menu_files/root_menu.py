@@ -58,27 +58,27 @@ class NODE_MT_custom_add_menu(BaseMenu):
         props.use_transform = True
         layout.separator(factor=spacing)
 
-        layout.menu(NODE_MT_custom_add_menu_attribute.bl_idname)
-        layout.menu(NODE_MT_custom_add_menu_input.bl_idname)
-        layout.menu(NODE_MT_custom_add_menu_output.bl_idname)
+        layout.menu("NODE_MT_custom_add_menu_attribute")
+        layout.menu("NODE_MT_custom_add_menu_input")
+        layout.menu("NODE_MT_custom_add_menu_output")
         layout.separator(factor=spacing)
 
-        layout.menu(NODE_MT_custom_add_menu_geometry.bl_idname)
-        layout.menu(NODE_MT_custom_add_menu_mesh.bl_idname)
-        layout.menu(NODE_MT_custom_add_menu_curve.bl_idname)
-        layout.menu(NODE_MT_custom_add_menu_instance.bl_idname)
-        layout.menu(NODE_MT_custom_add_menu_point.bl_idname)
-        layout.menu(NODE_MT_custom_add_menu_volume.bl_idname)
+        layout.menu("NODE_MT_custom_add_menu_geometry")
+        layout.menu("NODE_MT_custom_add_menu_mesh")
+        layout.menu("NODE_MT_custom_add_menu_curve")
+        layout.menu("NODE_MT_custom_add_menu_instance")
+        layout.menu("NODE_MT_custom_add_menu_point")
+        layout.menu("NODE_MT_custom_add_menu_volume")
         layout.separator(factor=spacing)
         
-        layout.menu(NODE_MT_custom_add_menu_material.bl_idname)
-        layout.menu(NODE_MT_custom_add_menu_texture.bl_idname)
-        layout.menu(NODE_MT_custom_add_menu_utilities.bl_idname)
+        layout.menu("NODE_MT_custom_add_menu_material")
+        layout.menu("NODE_MT_custom_add_menu_texture")
+        layout.menu("NODE_MT_custom_add_menu_utilities")
         
-        layout.menu(NODE_MT_custom_add_menu_UV.bl_idname)
+        layout.menu("NODE_MT_custom_add_menu_UV")
         layout.separator(factor=spacing)
-        layout.menu(NODE_MT_custom_add_menu_group.bl_idname)
-        layout.menu(NODE_MT_custom_add_menu_layout.bl_idname)
+        layout.menu("NODE_MT_custom_add_menu_group")
+        layout.menu("NODE_MT_custom_add_menu_layout")
         draw_root_assets(layout)
 
 classes = (
