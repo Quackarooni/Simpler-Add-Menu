@@ -3,6 +3,7 @@ from .__globals import (
     draw_assets_for_catalog, 
     fetch_user_preferences, 
     subcategory_spacing, 
+    add_node_type,
     spacing
 )
 
@@ -10,18 +11,44 @@ class BaseMenu(bpy.types.Menu):
     bl_label = "Menu"
     bl_space_type = "NODE_EDITOR"
 
+    draw_assets = False
     items = []
 
     @classmethod
     def poll(cls, context):
         return context.space_data.tree_type == 'GeometryNodeTree'
 
-    #def draw(self, context):
-    #   pass
+    def draw(self, context):
+        layout = self.layout
 
-class BaseMultilevelMenu():
+        for item in self.items:
+            if item == "SeparateMenu":
+                layout.separator(factor=spacing)
+            elif isinstance(item, str):
+                add_node_type(layout, item)
+            elif isinstance(item, dict):
+                for key, value in item.items():
+                    label = value.get("label", None)
+                    props = value.get("props", None)
+                    operator = add_node_type(layout, key, label=label)
+
+                    if props is not None:
+                        settings = operator.settings.add()
+                        for key, value in props.items():
+                            setattr(settings, key, value)
+            else:
+                raise TypeError(f"{item} is not a recognized format.")
+        
+        if self.draw_assets:
+            draw_assets_for_catalog(layout, catalog_path=self.bl_label)
+
+class BaseMultilevelMenu(bpy.types.Menu):
     items_compact = []
     items_expanded = []
+
+    @classmethod
+    def poll(cls, context):
+        return context.space_data.tree_type == 'GeometryNodeTree'
 
     @staticmethod
     def draw_compact(layout, items):

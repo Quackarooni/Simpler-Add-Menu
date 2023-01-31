@@ -7,7 +7,7 @@ classes = []
 
 def generate_multilevel_menu(idname, props):
     props["bl_idname"] = idname
-    menu_class = type(idname,(BaseMenu, BaseMultilevelMenu), props)
+    menu_class = type(idname,(BaseMultilevelMenu,), props)
     return menu_class
 
 def register():  
