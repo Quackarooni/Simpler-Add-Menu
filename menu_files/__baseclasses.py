@@ -7,6 +7,11 @@ from .__globals import (
     spacing
 )
 
+from bpy.app.translations import (
+    pgettext_iface as iface_,
+    contexts as i18n_contexts,
+)
+
 class BaseMenu(bpy.types.Menu):
     bl_label = "Menu"
     bl_space_type = "NODE_EDITOR"
@@ -27,15 +32,16 @@ class BaseMenu(bpy.types.Menu):
             elif isinstance(item, str):
                 add_node_type(layout, item)
             elif isinstance(item, dict):
-                for key, value in item.items():
-                    label = value.get("label", None)
-                    props = value.get("props", None)
-                    operator = add_node_type(layout, key, label=label)
+                node = item.get("node")
+                label = iface_(item.get("label", None))
+                props = item.get("props", None)
+                
+                operator = add_node_type(layout, node, label=label)
 
-                    if props is not None:
-                        settings = operator.settings.add()
-                        for key, value in props.items():
-                            setattr(settings, key, value)
+                if props is not None:
+                    settings = operator.settings.add()
+                    for key, value in props.items():
+                        setattr(settings, key, value)
             else:
                 raise TypeError(f"{item} is not a recognized format.")
         

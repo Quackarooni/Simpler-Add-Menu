@@ -69,11 +69,7 @@
             "GeometryNodeGeometryToInstance",
             "SeparateMenu",
             "GeometryNodeRaycast",
-            {
-                "GeometryNodeProximity": {
-                    "label": "Proximity"
-                }
-            },
+            {"node": "GeometryNodeProximity", "label": "Proximity"},
             "GeometryNodeSampleIndex",
             "GeometryNodeSampleNearest",
             "SeparateMenu",
@@ -314,22 +310,10 @@
         "bl_label": "Color",
         "draw_assets": true,
         "items": [
-            {
-                "ShaderNodeValToRGB": {
-                    "label": "Color Ramp"
-                }
-            },
+            {"node": "ShaderNodeValToRGB", "label": "Color Ramp"},
             "ShaderNodeRGBCurve",
             "SeparateMenu",
-            {
-                "ShaderNodeMix": {
-                    "label": "Mix Color",
-                    "props": {
-                        "name": "data_type",
-                        "value": "'RGBA'"
-                    }
-                }
-            },
+            {"node": "ShaderNodeMix", "label": "Mix Color", "props": {"name": "data_type", "value": "'RGBA'"}},
             "FunctionNodeCombineColor",
             "FunctionNodeSeparateColor"
         ]
@@ -357,15 +341,7 @@
             "ShaderNodeVectorMath",
             "ShaderNodeVectorRotate",
             "SeparateMenu",
-            {
-                "ShaderNodeMix": {
-                    "label": "Mix Vector",
-                    "props": {
-                        "name": "data_type",
-                        "value": "'VECTOR'"
-                    }
-                }
-            },
+            {"node": "ShaderNodeMix", "label": "Mix Vector", "props": {"name": "data_type", "value": "'VECTOR'"}},
             "ShaderNodeCombineXYZ",
             "ShaderNodeSeparateXYZ"
         ]
