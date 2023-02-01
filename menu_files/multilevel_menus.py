@@ -1,7 +1,7 @@
 import bpy
 import json
 from .__globals import dir_path
-from .__baseclasses import BaseMenu, BaseMultilevelMenu
+from .__baseclasses import BaseMultilevelMenu
 
 def generate_multilevel_menu(idname, props):
     props["bl_idname"] = idname
