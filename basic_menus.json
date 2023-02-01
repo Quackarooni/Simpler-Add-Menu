@@ -1,0 +1,424 @@
+{
+    "NODE_MT_custom_add_menu_attribute": {
+        "bl_label": "Attribute",
+        "draw_assets": true,
+        "items": [
+            "GeometryNodeAttributeStatistic",
+            "GeometryNodeAttributeDomainSize",
+            "SeparateMenu",
+            "GeometryNodeCaptureAttribute",
+            "GeometryNodeStoreNamedAttribute",
+            "GeometryNodeRemoveAttribute"
+        ]
+    },
+    "NODE_MT_custom_add_menu_input_scene": {
+        "bl_label": "Scene",
+        "draw_assets": false,
+        "items": [
+            "GeometryNodeCollectionInfo",
+            "GeometryNodeObjectInfo",
+            "GeometryNodeSelfObject",
+            "GeometryNodeIsViewport",
+            "GeometryNodeInputSceneTime"
+        ]
+    },
+    "NODE_MT_custom_add_menu_input_fields": {
+        "bl_label": "Fields",
+        "draw_assets": false,
+        "items": [
+            "GeometryNodeInputID",
+            "GeometryNodeInputIndex",
+            "GeometryNodeInputNamedAttribute",
+            "GeometryNodeInputNormal",
+            "GeometryNodeInputPosition",
+            "GeometryNodeInputRadius"
+        ]
+    },
+    "NODE_MT_custom_add_menu_input_constants": {
+        "bl_label": "Constants",
+        "draw_assets": false,
+        "items": [
+            "FunctionNodeInputBool",
+            "FunctionNodeInputColor",
+            "FunctionNodeInputInt",
+            "GeometryNodeInputMaterial",
+            "FunctionNodeInputString",
+            "ShaderNodeValue",
+            "FunctionNodeInputVector"
+        ]
+    },
+    "NODE_MT_custom_add_menu_output": {
+        "bl_label": "Output",
+        "draw_assets": true,
+        "items": [
+            "GeometryNodeViewer"
+        ]
+    },
+    "NODE_MT_custom_add_menu_geometry": {
+        "bl_label": "Geometry",
+        "draw_assets": true,
+        "items": [
+            "GeometryNodeBoundBox",
+            "GeometryNodeConvexHull",
+            "GeometryNodeDeleteGeometry",
+            "GeometryNodeDuplicateElements",
+            "GeometryNodeMergeByDistance",
+            "GeometryNodeTransform",
+            "SeparateMenu",
+            "GeometryNodeJoinGeometry",
+            "GeometryNodeGeometryToInstance",
+            "SeparateMenu",
+            "GeometryNodeRaycast",
+            {
+                "GeometryNodeProximity": {
+                    "label": "Proximity"
+                }
+            },
+            "GeometryNodeSampleIndex",
+            "GeometryNodeSampleNearest",
+            "SeparateMenu",
+            "GeometryNodeSeparateComponents",
+            "GeometryNodeSeparateGeometry",
+            "SeparateMenu",
+            "GeometryNodeSetID",
+            "GeometryNodeSetPosition"
+        ]
+    },
+    "NODE_MT_custom_add_menu_mesh_data": {
+        "bl_label": "Get Mesh Data",
+        "draw_assets": false,
+        "items": [
+            "GeometryNodeInputMeshVertexNeighbors",
+            "SeparateMenu",
+            "GeometryNodeInputMeshEdgeAngle",
+            "GeometryNodeInputMeshEdgeNeighbors",
+            "GeometryNodeInputMeshEdgeVertices",
+            "SeparateMenu",
+            "GeometryNodeInputMeshFaceArea",
+            "GeometryNodeInputMeshFaceNeighbors",
+            "GeometryNodeMeshFaceSetBoundaries",
+            "SeparateMenu",
+            "GeometryNodeInputMeshFaceIsPlanar",
+            "GeometryNodeInputShadeSmooth",
+            "SeparateMenu",
+            "GeometryNodeInputMeshIsland",
+            "GeometryNodeInputShortestEdgePaths"
+        ]
+    },
+    "NODE_MT_custom_add_menu_mesh_operations": {
+        "bl_label": "Mesh Operations",
+        "draw_assets": false,
+        "items": [
+            "GeometryNodeDualMesh",
+            "GeometryNodeExtrudeMesh",
+            "GeometryNodeFlipFaces",
+            "GeometryNodeSplitEdges",
+            "GeometryNodeScaleElements",
+            "SeparateMenu",
+            "GeometryNodeEdgePathsToCurves",
+            "GeometryNodeEdgePathsToSelection",
+            "SeparateMenu",
+            "GeometryNodeMeshBoolean",
+            "GeometryNodeMeshToCurve",
+            "GeometryNodeMeshToPoints",
+            "GeometryNodeMeshToVolume",
+            "SeparateMenu",
+            "GeometryNodeSampleNearestSurface",
+            "GeometryNodeSampleUVSurface",
+            "SeparateMenu",
+            "GeometryNodeSubdivideMesh",
+            "GeometryNodeSubdivisionSurface",
+            "GeometryNodeTriangulate"
+        ]
+    },
+    "NODE_MT_custom_add_menu_mesh_setters": {
+        "bl_label": "Set Mesh Data",
+        "draw_assets": false,
+        "items": [
+            "GeometryNodeSetShadeSmooth"
+        ]
+    },
+    "NODE_MT_custom_add_menu_mesh_primitives": {
+        "bl_label": "Mesh Primitives",
+        "draw_assets": true,
+        "items": [
+            "GeometryNodeMeshCone",
+            "GeometryNodeMeshCube",
+            "GeometryNodeMeshCylinder",
+            "GeometryNodeMeshGrid",
+            "GeometryNodeMeshIcoSphere",
+            "GeometryNodeMeshCircle",
+            "GeometryNodeMeshLine",
+            "GeometryNodeMeshUVSphere"
+        ]
+    },
+    "NODE_MT_custom_add_menu_mesh_topology": {
+        "bl_label": "Mesh Topology",
+        "draw_assets": true,
+        "items": [
+            "GeometryNodeCornersOfFace",
+            "GeometryNodeCornersOfVertex",
+            "SeparateMenu",
+            "GeometryNodeEdgesOfCorner",
+            "GeometryNodeEdgesOfVertex",
+            "SeparateMenu",
+            "GeometryNodeFaceOfCorner",
+            "GeometryNodeVertexOfCorner",
+            "GeometryNodeOffsetCornerInFace"
+        ]
+    },
+    "NODE_MT_custom_add_menu_curve_data": {
+        "bl_label": "Get Curve Data",
+        "draw_assets": false,
+        "items": [
+            "GeometryNodeInputCurveHandlePositions",
+            "GeometryNodeInputTangent",
+            "GeometryNodeInputCurveTilt",
+            "SeparateMenu",
+            "GeometryNodeCurveEndpointSelection",
+            "GeometryNodeCurveHandleTypeSelection",
+            "SeparateMenu",
+            "GeometryNodeInputSplineCyclic",
+            "GeometryNodeSplineLength",
+            "GeometryNodeSplineParameter",
+            "GeometryNodeInputSplineResolution"
+        ]
+    },
+    "NODE_MT_custom_add_menu_curve_operations": {
+        "bl_label": "Curve Operations",
+        "draw_assets": false,
+        "items": [
+            "GeometryNodeCurveToMesh",
+            "GeometryNodeCurveToPoints",
+            "SeparateMenu",
+            "GeometryNodeFillCurve",
+            "GeometryNodeFilletCurve",
+            "GeometryNodeReverseCurve",
+            "GeometryNodeTrimCurve",
+            "SeparateMenu",
+            "GeometryNodeSampleCurve",
+            "GeometryNodeResampleCurve",
+            "GeometryNodeSubdivideCurve",
+            "SeparateMenu",
+            "GeometryNodeCurveLength",
+            "GeometryNodeDeformCurvesOnSurface"
+        ]
+    },
+    "NODE_MT_custom_add_menu_curve_setters": {
+        "bl_label": "Set Curve Data",
+        "draw_assets": false,
+        "items": [
+            "GeometryNodeSetCurveNormal",
+            "GeometryNodeSetCurveRadius",
+            "GeometryNodeSetCurveTilt",
+            "SeparateMenu",
+            "GeometryNodeSetCurveHandlePositions",
+            "GeometryNodeCurveSetHandles",
+            "SeparateMenu",
+            "GeometryNodeSetSplineCyclic",
+            "GeometryNodeSetSplineResolution",
+            "GeometryNodeCurveSplineType"
+        ]
+    },
+    "NODE_MT_custom_add_menu_curve_primitives": {
+        "bl_label": "Curve Primitives",
+        "draw_assets": true,
+        "items": [
+            "GeometryNodeCurveArc",
+            "GeometryNodeCurvePrimitiveBezierSegment",
+            "GeometryNodeCurvePrimitiveCircle",
+            "GeometryNodeCurvePrimitiveLine",
+            "GeometryNodeCurveSpiral",
+            "GeometryNodeCurveQuadraticBezier",
+            "GeometryNodeCurvePrimitiveQuadrilateral",
+            "GeometryNodeCurveStar"
+        ]
+    },
+    "NODE_MT_custom_add_menu_curve_topology": {
+        "bl_label": "Curve Topology",
+        "draw_assets": true,
+        "items": [
+            "GeometryNodeOffsetPointInCurve",
+            "GeometryNodeCurveOfPoint",
+            "GeometryNodePointsOfCurve"
+        ]
+    },
+    "NODE_MT_custom_add_menu_instance": {
+        "bl_label": "Instances",
+        "draw_assets": true,
+        "items": [
+            "GeometryNodeInstanceOnPoints",
+            "GeometryNodeInstancesToPoints",
+            "SeparateMenu",
+            "GeometryNodeRealizeInstances",
+            "GeometryNodeRotateInstances",
+            "GeometryNodeScaleInstances",
+            "GeometryNodeTranslateInstances",
+            "SeparateMenu",
+            "GeometryNodeInputInstanceRotation",
+            "GeometryNodeInputInstanceScale"
+        ]
+    },
+    "NODE_MT_custom_add_menu_point": {
+        "bl_label": "Points",
+        "draw_assets": true,
+        "items": [
+            "GeometryNodeDistributePointsInVolume",
+            "GeometryNodeDistributePointsOnFaces",
+            "SeparateMenu",
+            "GeometryNodePoints",
+            "GeometryNodePointsToVertices",
+            "GeometryNodePointsToVolume",
+            "SeparateMenu",
+            "GeometryNodeSetPointRadius"
+        ]
+    },
+    "NODE_MT_custom_add_menu_volume": {
+        "bl_label": "Volume",
+        "draw_assets": true,
+        "items": [
+            "GeometryNodeVolumeCube",
+            "GeometryNodeVolumeToMesh"
+        ]
+    },
+    "NODE_MT_custom_add_menu_material": {
+        "bl_label": "Material",
+        "draw_assets": true,
+        "items": [
+            "GeometryNodeReplaceMaterial",
+            "SeparateMenu",
+            "GeometryNodeInputMaterialIndex",
+            "GeometryNodeMaterialSelection",
+            "SeparateMenu",
+            "GeometryNodeSetMaterial",
+            "GeometryNodeSetMaterialIndex"
+        ]
+    },
+    "NODE_MT_custom_add_menu_texture": {
+        "bl_label": "Texture",
+        "draw_assets": true,
+        "items": [
+            "ShaderNodeTexBrick",
+            "ShaderNodeTexChecker",
+            "ShaderNodeTexGradient",
+            "GeometryNodeImageTexture",
+            "ShaderNodeTexMagic",
+            "ShaderNodeTexMusgrave",
+            "ShaderNodeTexNoise",
+            "ShaderNodeTexVoronoi",
+            "ShaderNodeTexWave",
+            "ShaderNodeTexWhiteNoise"
+        ]
+    },
+    "NODE_MT_custom_add_menu_utilities_color": {
+        "bl_label": "Color",
+        "draw_assets": true,
+        "items": [
+            {
+                "ShaderNodeValToRGB": {
+                    "label": "Color Ramp"
+                }
+            },
+            "ShaderNodeRGBCurve",
+            "SeparateMenu",
+            {
+                "ShaderNodeMix": {
+                    "label": "Mix Color",
+                    "props": {
+                        "name": "data_type",
+                        "value": "'RGBA'"
+                    }
+                }
+            },
+            "FunctionNodeCombineColor",
+            "FunctionNodeSeparateColor"
+        ]
+    },
+    "NODE_MT_custom_add_menu_utilities_string": {
+        "bl_label": "String",
+        "draw_assets": true,
+        "items": [
+            "GeometryNodeStringJoin",
+            "FunctionNodeReplaceString",
+            "FunctionNodeSliceString",
+            "SeparateMenu",
+            "FunctionNodeStringLength",
+            "GeometryNodeStringToCurves",
+            "FunctionNodeValueToString",
+            "SeparateMenu",
+            "FunctionNodeInputSpecialCharacters"
+        ]
+    },
+    "NODE_MT_custom_add_menu_utilities_vector": {
+        "bl_label": "Vector",
+        "draw_assets": true,
+        "items": [
+            "ShaderNodeVectorCurve",
+            "ShaderNodeVectorMath",
+            "ShaderNodeVectorRotate",
+            "SeparateMenu",
+            {
+                "ShaderNodeMix": {
+                    "label": "Mix Vector",
+                    "props": {
+                        "name": "data_type",
+                        "value": "'VECTOR'"
+                    }
+                }
+            },
+            "ShaderNodeCombineXYZ",
+            "ShaderNodeSeparateXYZ"
+        ]
+    },
+    "NODE_MT_custom_add_menu_utilities_fields": {
+        "bl_label": "Fields",
+        "draw_assets": false,
+        "items": [
+            "GeometryNodeAccumulateField",
+            "GeometryNodeFieldAtIndex",
+            "GeometryNodeFieldOnDomain",
+            "FunctionNodeRandomValue"
+        ]
+    },
+    "NODE_MT_custom_add_menu_utilities_rotation": {
+        "bl_label": "Rotation",
+        "draw_assets": false,
+        "items": [
+            "FunctionNodeAlignEulerToVector",
+            "FunctionNodeRotateEuler"
+        ]
+    },
+    "NODE_MT_custom_add_menu_utilities_converter": {
+        "bl_label": "Converter",
+        "draw_assets": false,
+        "items": [
+            "FunctionNodeBooleanMath",
+            "GeometryNodeSwitch",
+            "SeparateMenu",
+            "ShaderNodeClamp",
+            "FunctionNodeCompare",
+            "ShaderNodeFloatCurve",
+            "ShaderNodeMapRange",
+            "SeparateMenu",
+            "ShaderNodeMix",
+            "ShaderNodeMath",
+            "FunctionNodeFloatToInt"
+        ]
+    },
+    "NODE_MT_custom_add_menu_UV": {
+        "bl_label": "UV",
+        "draw_assets": true,
+        "items": [
+            "GeometryNodeUVPackIslands",
+            "GeometryNodeUVUnwrap"
+        ]
+    },
+    "NODE_MT_custom_add_menu_layout": {
+        "bl_label": "Layout",
+        "draw_assets": true,
+        "items": [
+            "NodeFrame",
+            "NodeReroute"
+        ]
+    }
+}
