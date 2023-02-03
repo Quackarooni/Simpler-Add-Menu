@@ -29,7 +29,7 @@ Lastly, separators are added within menus to group similar items together. This 
 
 ## How to Modify Hotkeys
 
-<img title="" src="https://user-images.githubusercontent.com/83491032/210294621-c63bc25d-9e2d-4451-bd41-71eda8f77ef8.png" alt="" width="679">
+<img title="" src="https://user-images.githubusercontent.com/83491032/210294621-c63bc25d-9e2d-4451-bd41-71eda8f77ef8.png" alt="" width="679" data-align="center">
 
 The operator used for the calling the custom menu is named *`"custom_add_menu.invoke_menu"`*.
 
